@@ -1,0 +1,19 @@
+{
+"manifest_version": 2,
+  "name": "powerTabber",
+  "permissions": [
+  	"tabs",
+  	"storage",
+    "<all_urls>"
+  ],
+  "background": {
+      "scripts": ["bower_components/angular/angular.min.js"]
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "version": "0.1",
+  "description": "a tab manager for power users",
+  "browser_action": {
+    "default_title": "PowerTabber",
+    "default_popup": "index.html"
+  }
+}
