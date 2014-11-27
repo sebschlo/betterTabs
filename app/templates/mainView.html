@@ -1,6 +1,8 @@
 <div id="main-div" class="row">
+
   <!-- MAIN SCREEN AREA -->
   <div class="small-9 columns">
+
     <!-- HEADER AREA -->
     <div class='row pageHead'>
       <div class="small-7 columns">
@@ -8,24 +10,56 @@
       </div>
       <div class="small-5 columns button-bar">
         <ul class="button-group headerButtons">
-          <li><a href='#' id="list-mode" class="small button">List</a></li>
-          <li><a href='#' id="grid-mode" class="small button">Grid</a></li>
+          <li><a id="list-mode" class="small button" ng-click="listMode()">List</a></li>
+          <li><a id="grid-mode" class="small button" ng-click="gridMode()">Grid</a></li>
+          <!--<li><a id="openAllTabs" class="small button">Open All</a></li>-->
         </ul>
       </div>
     </div>
 
     <!-- CONTENT AREA -->
     <div class="row content">
-      <ul id="list-view" class="small-block-grid-4">
+      <!--WINDOWS-->
+      <ul id="list-view" class="small-block-grid-4" style="display: block;">
+        <li ng-repeat="window in windows">
+          <div class="window" droppable>
+            <div class="window-header" ng-click="goToWindow(window.id)">
+              <span class="window-title">Window {{$index}}</span>
+              <span class="close-window" ng-click="closeWindow(window.id)">x</span>
+            </div>
+            <!--TABS-->
+            <ul class="window-tabs">
+              <li ng-repeat="tab in window.tabs">
+                <div class="screenshot-wrapper" style="position: relative;"
+                     ng-click="goToTab(tab.id, window.id)" draggable>
+                  <img class="faviconImage inline" ng-src="{{tab.favIconUrl}}">
+                  <div class="title inline truncate">{{tab.title}}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!--PREDEFINED NEW WINDOW-->
         <li>
-          <div class='window' id='new-window'>
+          <div class='window' id='new-window' ng-click="newWindow()" droppable>
             <div class='window-header'>
               <span class='window-title'>New Window</span>
             </div>
           </div>
         </li>
       </ul>
-      <ul id="grid-view" class="small-block-grid-4"></ul>
+
+      <!--GRID VIEW-->
+      <ul id="grid-view" class="small-block-grid-4" style="display: none;">
+        <li ng-repeat="tab in tabs">
+          <div class="screenshot" style="background-image:url({{tab.screenshot}});">
+            <div class="screenshot-wrapper truncate" style="position: relative;" ng-click="goToTab(tab.id, tab.windowId)">
+              <img class="faviconImage inline" ng-src="{{tab.favIconUrl}}">
+              {{tab.title}}
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
 
   </div>
@@ -36,6 +70,6 @@
       <li id='open'>Open</li>
       <li id='snoozeButton'>SNOOZE</li>
     </ul>
-    <a href='#' id="createCategory" class='small button new-list'>New List</a>
+    <a id="createCategory" class='small button new-list'>New List</a>
   </div>
 </div>

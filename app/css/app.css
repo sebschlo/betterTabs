@@ -75,7 +75,7 @@ ol li ol, ol li ul, ul li ol, ul li ul {
   position: relative;
   background-color: #E7FAFF;
   border: 1px solid #D9EBF0;
-  opacity: 80%;
+  opacity: .8;
   -moz-border-radius:     5px;
   -webkit-border-radius:  5px;
   border-radius:          5px;
